@@ -92,20 +92,20 @@
 
 ### Windows 版本
 
-- **Win-x64** (64位) - [下载](downloads/win-x64.zip)
-- **Win-x86** (32位) - [下载](downloads/win-x86.zip)
-- **Win-ARM** - [下载](downloads/win-arm64.zip)
+- **Win-x64** (64位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
+- **Win-x86** (32位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
+- **Win-ARM** - [下载](https://github.com/moneyfengcn/Tunneling/releases)
 
 ### Linux 版本
 
-- **Linux-x64** (64位) - [下载](downloads/linux-x64.zip)
-- **Linux-ARM** (32位) - [下载](downloads/linux-arm.zip)
-- **Linux-ARM64** - [下载](downloads/linux-arm64.zip)
+- **Linux-x64** (64位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
+- **Linux-ARM** (32位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
+- **Linux-ARM64** - [下载](https://github.com/moneyfengcn/Tunneling/releases)
 
 ### macOS 版本
 
-- **MacOS-x64** (Intel) - [下载](downloads/osx-x64.zip)
-- **MacOS-ARM** (Apple Silicon) - [下载](downloads/osx-arm64.zip)
+- **MacOS-x64** (Intel) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
+- **MacOS-ARM** (Apple Silicon) - [下载]([downloads/osx-arm64.zip](https://github.com/moneyfengcn/Tunneling/releases))
 
 ### 安装步骤
 
