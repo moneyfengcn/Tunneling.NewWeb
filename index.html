@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 量子隧道 - 高效稳定的内网穿透工具</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container-lg">
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="bi bi-lightning-charge-fill text-primary"></i>
+                量子隧道
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">功能特性</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#usage">使用场景</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">联系我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section py-5">
+        <div class="container-lg">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">
+                        构建你的世界<br>
+                        <span class="text-primary"> 量子隧道</span>
+                    </h1>
+                    <p class="fs-5 text-muted mb-4">
+                        量子隧道（Tunneling）是一款高效、稳定的内网端口穿透工具，采用反向隧道技术，通过一台公网服务器实现外网安全访问多个内网服务。
+                    </p>
+                    <div class="d-flex gap-3 mb-4 flex-wrap">
+                        <a href="#download" class="btn btn-primary btn-lg px-5 rounded-pill">
+                            <i class="bi bi-download me-2"></i>开始使用
+                        </a>
+                        <a href="readme.md" class="btn btn-outline-primary btn-lg px-5 rounded-pill" file="readme.md" download>
+                            <i class="bi bi-book me-2"></i>查看文档
+                        </a>
+                    </div>
+                    <p class="text-muted small">
+                        <i class="bi bi-info-circle"></i>
+                        <strong>注意：</strong>本程序为闭源共享软件，可自由下载、使用、传播。
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <div class="hero-graphic">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特性 -->
+    <section id="features" class="features-section py-5 bg-light">
+        <div class="container-lg">
+            <h2 class="text-center mb-5">
+                <span class="text-muted">核心功能</span>
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3">高效稳定</h5>
+                        <p class="text-muted">采用反向隧道技术，性能优异，连接稳定可靠，支持长连接。</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3">安全保护</h5>
+                        <p class="text-muted">支持多种加密方式，确保数据传输安全，隐私得到充分保护。</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-pc-display"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3">多端适配</h5>
+                        <p class="text-muted">支持Windows、Linux、macOS等多个操作系统和平台。</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-sliders"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3">易于配置</h5>
+                        <p class="text-muted">配置简单，上手快速，提供详细的文档和示例。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持的服务类型 -->
+    <section class="services-section py-5">
+        <div class="container-lg">
+            <h2 class="text-center mb-5">
+                <span class="text-muted">支持的服务类型</span>
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-item p-4 rounded-3 bg-light">
+                        <div class="service-icon mb-3">
+                            <i class="bi bi-window"></i>
+                        </div>
+                        <h5>远程桌面</h5>
+                        <p class="text-muted mb-0">安全访问内网远程桌面，实现异地办公和维护。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item p-4 rounded-3 bg-light">
+                        <div class="service-icon mb-3">
+                            <i class="bi bi-globe"></i>
+                        </div>
+                        <h5>Web 服务</h5>
+                        <p class="text-muted mb-0">暴露内网 Web 应用到互联网，实现远程访问。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item p-4 rounded-3 bg-light">
+                        <div class="service-icon mb-3">
+                            <i class="bi bi-terminal"></i>
+                        </div>
+                        <h5>SSH 连接</h5>
+                        <p class="text-muted mb-0">安全的 SSH 穿透，远程管理服务器和设备。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item p-4 rounded-3 bg-light">
+                        <div class="service-icon mb-3">
+                            <i class="bi bi-film"></i>
+                        </div>
+                        <h5>媒体服务</h5>
+                        <p class="text-muted mb-0">流媒体服务穿透，支持各类媒体服务器。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item p-4 rounded-3 bg-light">
+                        <div class="service-icon mb-3">
+                            <i class="bi bi-database"></i>
+                        </div>
+                        <h5>数据库</h5>
+                        <p class="text-muted mb-0">数据库端口穿透，远程数据库管理和访问。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item p-4 rounded-3 bg-light">
+                        <div class="service-icon mb-3">
+                            <i class="bi bi-plug"></i>
+                        </div>
+                        <h5>其他服务</h5>
+                        <p class="text-muted mb-0">支持几乎所有基于 TCP 的服务穿透。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用场景 -->
+    <section id="usage" class="usage-section py-5 bg-light">
+        <div class="container-lg">
+            <h2 class="text-center mb-5">
+                <span class="text-muted">使用场景</span>
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="usage-card p-4">
+                        <div class="usage-icon mb-3">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                        <h5>企业办公</h5>
+                        <p class="text-muted">为企业员工提供安全的远程访问内网资源的方案，支持异地办公和出差访问。</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="usage-card p-4">
+                        <div class="usage-icon mb-3">
+                            <i class="bi bi-wrench"></i>
+                        </div>
+                        <h5>远程维护</h5>
+                        <p class="text-muted">为技术人员提供远程维护内网设备的能力，提高工作效率，降低运维成本。</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="usage-card p-4">
+                        <div class="usage-icon mb-3">
+                            <i class="bi bi-cloud-upload"></i>
+                        </div>
+                        <h5>个人应用共享</h5>
+                        <p class="text-muted">将个人开发的应用或服务分享给朋友，实现互联网访问内网应用的需求。</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="usage-card p-4">
+                        <div class="usage-icon mb-3">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h5>安全隧道</h5>
+                        <p class="text-muted">建立安全的加密隧道，保护内网和互联网之间的数据传输，防止信息泄露。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="about-section py-5">
+        <div class="container-lg">
+            <h2 class="text-center mb-5">
+                <span class="text-muted">关于我们</span>
+            </h2>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <div class="about-graphic">
+                            <i class="bi bi-heart-fill text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4">为什么选择 量子隧道？</h3>
+                    <ul class="about-list">
+
+                        <li>
+                            <i class="bi bi-check-circle-fill text-primary"></i>
+                            <strong>私有化部署：</strong>部署在你自己的服务器上，保障数据安全。
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill text-primary"></i>
+                            <strong>跨平台支持：</strong>支持主流操作系统，兼容性强。
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle-fill text-primary"></i>
+                            <strong>安全可靠：</strong>支持加密传输，保护用户隐私。
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle-fill text-primary"></i>
+                            <strong>完善文档：</strong>提供详细的使用文档和常见问题解答。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载与快速开始 -->
+    <section id="download" class="download-section py-5 bg-light">
+        <div class="container-lg">
+            <div class="text-center mb-5">
+                <h2 class="mb-3 text-dark">下载 量子隧道</h2>
+                <p class="fs-5 text-muted">
+                    选择适合你的版本
+                </p>
+            </div>
+
+            <!-- 分类标签 -->
+            <div class="download-tabs mb-5">
+                <div class="tabs-container">
+                    <button class="tab-btn active" data-tab="windows">
+                        WINDOWS
+                    </button>
+                    <button class="tab-btn" data-tab="linux">
+                        LINUX
+                    </button>
+                    <button class="tab-btn" data-tab="macos">
+                        MACOS
+                    </button>
+                </div>
+            </div>
+
+            <!-- Windows 版本 -->
+            <div class="tab-content active" id="windows-content">
+                <div class="downloads-grid">
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">Win-x64</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60">
+                                    <path fill="#0078D4"
+                                        d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>Windows</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/win-x64.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">Win-x86</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60">
+                                    <path fill="#0078D4"
+                                        d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>Windows</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/win-x86.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">Win-ARM</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60">
+                                    <path fill="#0078D4"
+                                        d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>Windows</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/win-arm64.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linux 版本 -->
+            <div class="tab-content" id="linux-content">
+                <div class="downloads-grid">
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">Linux-x64</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" fill="#E95420"/>
+                                    <circle cx="18.6" cy="12" r="1.6" fill="#fff"/>
+                                    <circle cx="8.2" cy="6.8" r="1.6" fill="#fff"/>
+                                    <circle cx="8.2" cy="17.2" r="1.6" fill="#fff"/>
+                                    <path d="M12 12 L17 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M12 12 L8.6 7.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M12 12 L8.6 16.4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>Linux</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/linux-x64.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">Linux-ARM</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" fill="#E95420"/>
+                                    <circle cx="18.6" cy="12" r="1.6" fill="#fff"/>
+                                    <circle cx="8.2" cy="6.8" r="1.6" fill="#fff"/>
+                                    <circle cx="8.2" cy="17.2" r="1.6" fill="#fff"/>
+                                    <path d="M12 12 L17 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M12 12 L8.6 7.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M12 12 L8.6 16.4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>Linux</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/linux-arm.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">Linux-ARM64</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" fill="#E95420"/>
+                                    <circle cx="18.6" cy="12" r="1.6" fill="#fff"/>
+                                    <circle cx="8.2" cy="6.8" r="1.6" fill="#fff"/>
+                                    <circle cx="8.2" cy="17.2" r="1.6" fill="#fff"/>
+                                    <path d="M12 12 L17 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M12 12 L8.6 7.6" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M12 12 L8.6 16.4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>Linux</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/linux-arm64.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- macOS 版本 -->
+            <div class="tab-content" id="macos-content">
+                <div class="downloads-grid">
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">MacOS-x64</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60">
+                                    <path fill="#555555"
+                                        d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.61-2.53 3.44l-.04-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>MacOS</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/osx-x64.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="card-top">
+                            <div class="os-label">MacOS-ARM</div>
+                            <div class="os-icon">
+                                <svg viewBox="0 0 24 24" width="60" height="60">
+                                    <path fill="#555555"
+                                        d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.61-2.53 3.44l-.04-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h5>MacOS</h5>
+                        <p class="version-info">版本：v26.5.21.1</p>
+                        <p class="version-info">发布日期：2026-05-21</p>
+                        <a href="/downloads/osx-arm64.zip" class="btn-download" download>
+                            <i class="bi bi-download"></i> DOWNLOAD
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="small text-muted">
+                    需要帮助？查看我们的 <a href="readme.md" class="text-primary text-decoration-none fw-semibold" download>完整文档</a> 或 <a
+                        href="#contact" class="text-primary text-decoration-none fw-semibold">联系我们</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="contact-section py-5 bg-light">
+        <div class="container-lg">
+            <h2 class="text-center mb-5">
+                <span class="text-muted">联系我们</span>
+            </h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-card p-5 bg-white rounded-3 shadow-sm">
+                        <div class="text-center">
+                            <div class="contact-icon mb-4">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <h4 class="mb-3">有任何疑问？</h4>
+                            <p class="text-muted mb-4">我们很乐意为您解答，请通过以下方式与我们联系。</p>
+                            <div class="contact-methods">
+                                <p class="mb-3">
+                                    <strong>邮箱：</strong>
+                                    <a href="mailto:moneyfengcn@gmail.com"
+                                        class="text-primary text-decoration-none">moneyfengcn@gmail.com</a>
+                                </p>
+                                <p>
+                                    <strong>反馈：</strong>
+                                    如发现 BUG 或有功能建议，欢迎通过邮件或提交 Issue。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer py-4 bg-dark text-light">
+        <div class="container-lg">
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3">
+                    <h6 class="fw-bold mb-3">关于</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-light text-decoration-none opacity-75 hover-bright">产品简介</a></li>
+                        <li><a href="#" class="text-light text-decoration-none opacity-75 hover-bright">功能特性</a></li>
+                        <li><a href="#" class="text-light text-decoration-none opacity-75 hover-bright">更新日志</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6 class="fw-bold mb-3">资源</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-light text-decoration-none opacity-75 hover-bright">使用文档</a></li>
+                        <li><a href="#" class="text-light text-decoration-none opacity-75 hover-bright">常见问题</a></li>
+                        <li><a href="#" class="text-light text-decoration-none opacity-75 hover-bright">故障排查</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6 class="fw-bold mb-3">联系</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="mailto:moneyfengcn@gmail.com"
+                                class="text-light text-decoration-none opacity-75 hover-bright">邮件反馈</a></li>
+                        <li><a href="https://github.com/moneyfengcn/Tunneling/issues" class="text-light text-decoration-none opacity-75 hover-bright">问题报告</a></li>
+                        <li><a href="https://github.com/moneyfengcn/Tunneling" class="text-light text-decoration-none opacity-75 hover-bright">功能建议</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-25">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="small opacity-75 mb-0">
+                        &copy; 2024 量子隧道. All rights reserved.
+                    </p>
+                </div>         
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
