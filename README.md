@@ -1,182 +1,403 @@
-# 量子隧道（Tunneling）
+﻿# 量子隧道（Tunneling）
 
-⚡ **高效稳定的内网穿透工具**
+<img src="main.jpg" />
 
-![License](https://img.shields.io/badge/License-Freeware-brightgreen)
-![Version](https://img.shields.io/badge/Version-v26.5.21.1-blue)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-green)
+## 1. 介绍
 
-## 📋 目录
+**量子隧道（Tunneling）** 是一款轻量级内网端口穿透工具，基于反向隧道技术。它通过一台公网服务器，将外部访问安全转发到内网服务，如远程桌面、Web、SSH、Jellyfin 等。
 
-- [产品简介](#产品简介)
-- [核心功能](#核心功能)
-- [支持的服务类型](#支持的服务类型)
-- [使用场景](#使用场景)
-- [为什么选择量子隧道](#为什么选择量子隧道)
-- [系统要求](#系统要求)
-- [下载安装](#下载安装)
-- [快速开始](#快速开始)
-- [联系方式](#联系方式)
-- [许可证](#许可证)
+> 核心思路：内网客户端主动连接公网服务端，建立长连接；公网请求到达服务端后，再通过该通道转发到客户端的内网服务。
 
-## 产品简介
+### 1.1 架构概览
 
-**量子隧道（Tunneling）** 是一款高效、稳定的内网端口穿透工具。采用反向隧道技术，通过一台公网服务器实现外网安全访问多个内网服务。
+- 服务端：部署在公网服务器，负责接收客户端连接、管理映射规则、转发外网请求。
+- 客户端：运行在内网主机上，使用 `AccessToken` 与服务端建立隧道连接。
+- `AccessToken` 由服务端定义，客户端和服务端一致才能建立隧道连接。
+- 映射规则：在服务端配置 `MapGroups` 与 `MapProxy`，实现多环境、多主机、多端口的灵活穿透。
 
-### 主要特点
+### 1.2 适用场景
 
-- 🚀 **高性能** - 采用反向隧道技术，性能优异，连接稳定可靠
-- 🔒 **安全可靠** - 支持多种加密方式，确保数据传输安全
-- 🖥️ **跨平台** - 支持 Windows、Linux、macOS 等多个操作系统
-- ⚙️ **易于使用** - 配置简单，上手快速，文档完善
+- 家庭 NAS 或个人服务器远程访问
+- 局域网内 Web 服务、数据库、SSH、远程桌面暴露
+- 开发调试、远程办公、私有服务访问
 
-## 核心功能
+## 2. 主要特点
 
-| 功能 | 描述 |
-|------|------|
-| **高效稳定** | 采用反向隧道技术，性能优异，连接稳定可靠，支持长连接 |
-| **安全保护** | 支持多种加密方式，确保数据传输安全，隐私得到充分保护 |
-| **多端适配** | 支持 Windows、Linux、macOS 等多个操作系统和平台 |
-| **易于配置** | 配置简单，上手快速，提供详细的文档和示例 |
+- 支持 Windows / Linux / macOS
+- 客户端无需公网 IP、无需路由器端口映射
+- 支持多组映射、分组隔离管理
+- `AccessToken` 认证确保连接安全
+- 服务端与客户端均支持以服务方式运行，开机自启
 
-## 支持的服务类型
+## 3. 文件说明
 
-量子隧道支持几乎所有基于 TCP 的服务穿透：
+发布包一般包含：
 
-| 服务类型 | 描述 |
-|---------|------|
-| 🖥️ **远程桌面** | 安全访问内网远程桌面，实现异地办公和维护 |
-| 🌐 **Web 服务** | 暴露内网 Web 应用到互联网，实现远程访问 |
-| 🖲️ **SSH 连接** | 安全的 SSH 穿透，远程管理服务器和设备 |
-| 🎬 **媒体服务** | 流媒体服务穿透，支持各类媒体服务器 |
-| 💾 **数据库** | 数据库端口穿透，远程数据库管理和访问 |
-| 🔌 **其他服务** | 支持几乎所有基于 TCP 的服务穿透 |
+- `Tunneling.Server.exe` / `Tunneling.Server`
+- `Tunneling.Client.exe` / `Tunneling.Client`
+- `appsettings.json`
+- `README.md`
 
-## 使用场景
+## 4. 系统要求
 
-### 🏢 企业办公
-为企业员工提供安全的远程访问内网资源的方案，支持异地办公和出差访问。
+- Windows / Linux / macOS 均支持
+- 服务端与客户端可以混搭使用，即：`使用了部署在linux的服务端，客户端也可以使用windows的客户端`
+- 服务器端部署在具有公网 IP 的主机上
+- 服务端需要放行 `urls` 中指定端口以及所有 `MapProxy.PublicPort`
 
-### 🔧 远程维护
-为技术人员提供远程维护内网设备的能力，提高工作效率，降低运维成本。
+## 5. 服务端部署
 
-### 👥 个人应用共享
-将个人开发的应用或服务分享给朋友，实现互联网访问内网应用的需求。
+### 5.1 部署步骤
 
-### 🔐 安全隧道
-建立安全的加密隧道，保护内网和互联网之间的数据传输，防止信息泄露。
+1. 将服务端可执行文件与 `appsettings.json` 放在同一目录。
+2. 编辑 `appsettings.json`。
+3. 确保服务器防火墙/安全组放行所需端口。
+4. 运行服务端程序。
 
-## 为什么选择量子隧道
+### 5.2 服务端配置示例
 
-✅ **私有化部署** - 部署在你自己的服务器上，保障数据安全  
-✅ **跨平台支持** - 支持主流操作系统，兼容性强  
-✅ **安全可靠** - 支持加密传输，保护用户隐私  
-✅ **完善文档** - 提供详细的使用文档和常见问题解答  
-
-## 系统要求
-
-### 支持的操作系统
-
-| 操作系统 | 架构 | 版本 | 发布日期 |
-|---------|------|------|---------|
-| Windows | x64 (64位) | v26.5.21.1 | 2026-05-21 |
-| Windows | x86 (32位) | v26.5.21.1 | 2026-05-21 |
-| Windows | ARM | v26.5.21.1 | 2026-05-21 |
-| Linux | x64 (64位) | v26.5.21.1 | 2026-05-21 |
-| Linux | ARM (32位) | v26.5.21.1 | 2026-05-21 |
-| Linux | ARM64 | v26.5.21.1 | 2026-05-21 |
-| macOS | x64 (Intel) | v26.5.21.1 | 2026-05-21 |
-| macOS | ARM (Apple Silicon) | v26.5.21.1 | 2026-05-21 |
-
-## 下载安装
-
-### Windows 版本
-
-- **Win-x64** (64位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-- **Win-x86** (32位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-- **Win-ARM** - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-
-### Linux 版本
-
-- **Linux-x64** (64位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-- **Linux-ARM** (32位) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-- **Linux-ARM64** - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-
-### macOS 版本
-
-- **MacOS-x64** (Intel) - [下载](https://github.com/moneyfengcn/Tunneling/releases)
-- **MacOS-ARM** (Apple Silicon) - [下载]([downloads/osx-arm64.zip](https://github.com/moneyfengcn/Tunneling/releases))
-
-### 安装步骤
-
-1. 根据你的操作系统选择对应的版本
-2. 下载并解压到本地目录
-3. 配置服务器连接信息
-4. 运行程序即可
-
-## 快速开始
-
-### 基本配置
-
-```
-1. 解压下载的文件
-2. 编辑配置文件（config.toml 或类似的配置文件）
-3. 设置服务器地址和端口
-4. 运行程序开始穿透
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "urls": "http://*:1984",
+  "SystemConfig": {
+    "UserName": "admin",
+    "Password": "123123",
+    "MapGroups": [
+      {
+        "GroupName": "家里的NAS",
+        "AccessToken": "A982D360-E59E-4012-B4AF-E571169218AA",
+        "MapProxy": [
+          {
+            "Name": "win2016远程桌面",
+            "PublicPort": 2000,
+            "LocalHost": "192.168.1.234",
+            "LocalPort": 3389,
+            "Policy": {
+              "Time": "00:03:00",
+              "Threshold": 3
+            }
+          },
+          {
+            "Name": "Jellyfin",
+            "PublicPort": 8096,
+            "LocalHost": "192.168.1.250",
+            "LocalPort": 8096
+          }
+        ]
+      },
+      {
+        "GroupName": "公司网络",
+        "AccessToken": "C795479D-800E-49D9-BC38-A0B91B8A5544",
+        "MapProxy": [
+          {
+            "Name": "win2022远程桌面",
+            "PublicPort": 4000,
+            "LocalHost": "192.168.1.248",
+            "LocalPort": 3389
+          },
+          {
+            "Name": "SQL Server",
+            "PublicPort": 21433,
+            "LocalHost": "127.0.0.1",
+            "LocalPort": 1433
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
-### 常见配置示例
+### 5.3 服务端配置说明
 
-详细的配置说明和示例，请参考项目的完整文档。
+#### `SystemConfig.MapGroups`
 
-## 常见问题（FAQ）
+<table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">字段</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">说明</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">是否必填</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`GroupName`</td>
+      <td style="border:1px solid #ddd; padding:8px;">分组名称，用于区分不同内网环境</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`AccessToken`</td>
+      <td style="border:1px solid #ddd; padding:8px;">组认证令牌，必须与客户端一致</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`MapProxy`</td>
+      <td style="border:1px solid #ddd; padding:8px;">当前分组的映射规则列表</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+  </tbody>
+</table>
 
-- **Q: 程序的类型是什么？**  
-  A: 本程序为闭源共享软件，可自由下载、使用、传播。
+#### `MapProxy` 字段
 
-- **Q: 如何获得更多帮助？**  
-  A: 请查看完整文档或通过邮件与我们联系。
+<table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">字段</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">说明</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">是否必填</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`Name`</td>
+      <td style="border:1px solid #ddd; padding:8px;">映射名称，仅用于日志和管理</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`PublicPort`</td>
+      <td style="border:1px solid #ddd; padding:8px;">公网访问端口</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`LocalHost`</td>
+      <td style="border:1px solid #ddd; padding:8px;">内网目标主机 IP</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`LocalPort`</td>
+      <td style="border:1px solid #ddd; padding:8px;">内网目标服务端口</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`Policy`</td>
+      <td style="border:1px solid #ddd; padding:8px;">可选防暴破策略</td>
+      <td style="border:1px solid #ddd; padding:8px;">否</td>
+    </tr>
+  </tbody>
+</table>
 
-- **Q: 可以用于商业用途吗？**  
-  A: 请通过邮件咨询许可证相关事宜。
+#### 示例映射效果
 
-## 联系方式
+<table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">映射名称</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">外网访问地址</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">内网目标服务</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">远程桌面</td>
+      <td style="border:1px solid #ddd; padding:8px;">`8.134.13.229:2000`</td>
+      <td style="border:1px solid #ddd; padding:8px;">`192.168.1.234:3389`</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">Jellyfin</td>
+      <td style="border:1px solid #ddd; padding:8px;">`8.134.13.229:8096`</td>
+      <td style="border:1px solid #ddd; padding:8px;">`192.168.1.250:8096`</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">SSH</td>
+      <td style="border:1px solid #ddd; padding:8px;">`8.134.13.229:10022`</td>
+      <td style="border:1px solid #ddd; padding:8px;">`192.168.1.239:22`</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">MyWeb</td>
+      <td style="border:1px solid #ddd; padding:8px;">`8.134.13.229:8080`</td>
+      <td style="border:1px solid #ddd; padding:8px;">`192.168.1.248:80`</td>
+    </tr>
+  </tbody>
+</table>
 
-### 邮箱联系
-📧 **Email:** [moneyfengcn@gmail.com](mailto:moneyfengcn@gmail.com)
+### 5.4 Policy 防暴破策略
 
-### GitHub
-🔗 **GitHub:** [https://github.com/moneyfengcn/Tunneling](https://github.com/moneyfengcn/Tunneling)
+`Policy` 用于限制同一 IP 的连接频率，减少暴力破解风险。
 
-- 问题报告：[Issues](https://github.com/moneyfengcn/Tunneling/issues)
-- 功能建议：提交 Issue 或发送邮件
+<table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">字段</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">说明</th>
+      <th style="border:1px solid #ddd; padding:8px; text-align:left; background-color:#f2f2f2;">是否必填</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`Time`</td>
+      <td style="border:1px solid #ddd; padding:8px;">时间窗口，格式 `HH:MM:SS`</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #ddd; padding:8px;">`Threshold`</td>
+      <td style="border:1px solid #ddd; padding:8px;">该窗口内允许的最大连接次数</td>
+      <td style="border:1px solid #ddd; padding:8px;">是</td>
+    </tr>
+  </tbody>
+</table>
 
-### 反馈
-如发现 BUG 或有功能建议，欢迎通过邮件或提交 Issue。
+#### 示例
 
-## 更新日志
+```json
+"Policy": {
+  "Time": "00:03:00",
+  "Threshold": 3
+}
+```
 
-### v26.5.21.1 (2026-05-21)
-- 初始版本发布
+- 含义：同一 IP 在 3 分钟内连接超过 3 次则暂时拒绝。
+- 推荐值：远程桌面 `00:05:00` / `Threshold` 3，普通服务可适当提高到 5。
 
-## 许可证
+## 6. 服务端安装为 Windows 服务
 
-本程序为**闭源共享软件**，可自由下载、使用、传播。
+推荐将服务端安装为 Windows 服务，方便开机自启和稳定运行。
 
-### 使用条款
+> `--install` / `--uninstall` 是 Windows 服务专用参数，仅适用于 Windows 版本。Linux/macOS 请使用 systemd 或其他后台运行方式。
 
-- ✅ 自由下载
-- ✅ 自由使用
-- ✅ 自由传播
-- ❌ 禁止反向工程
-- ❌ 禁止修改二进制文件
+### 6.1 安装
 
-## 致谢
+```cmd
+Tunneling.Server.exe --install
+```
 
-感谢所有使用和支持量子隧道的用户！
+### 6.2 卸载
+
+```cmd
+Tunneling.Server.exe --uninstall
+```
+
+> 程序会自动检查服务是否存在，避免重复创建或删除失败。
+
+## 7. 客户端部署
+
+### 7.1 客户端配置示例
+
+将客户端可执行文件与 `appsettings.json` 放在同一目录。
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning"
+    }
+  },
+  "Server": {
+    "ServerAddress": "http://8.134.13.229:1984/",
+    "AccessToken": "A982D360-E59E-4012-B4AF-E571169218AA"
+  }
+}
+```
+
+- `ServerAddress`：服务端地址，必须以 `http://` 或 `https://` 开头，末尾带 `/`。
+- `AccessToken`：必须与服务端对应分组一致。
+
+### 7.2 Windows 运行
+
+#### 控制台模式（调试用）
+
+```cmd
+Tunneling.Client.exe
+```
+
+#### 安装为 Windows 服务
+
+Server端和Client端均支持注册为windows服务
+
+```cmd
+Tunneling.Client.exe --install
+Tunneling.Server.exe --install
+```
+
+#### 卸载服务
+
+```cmd
+Tunneling.Client.exe --uninstall
+Tunneling.Server.exe --uninstall
+```
+
+> `--install` / `--uninstall` 是 Windows 服务专用参数，仅适用于 Windows 平台。
+
+#### 管理服务
+
+```cmd
+sc start TunnelingClient
+sc stop TunnelingClient
+sc query TunnelingClient
+```
+
+### 7.3 Linux / macOS 运行
+
+```bash
+chmod +x Tunneling.Client
+./Tunneling.Client
+```
+
+#### 推荐使用 systemd
+
+保存为 `/etc/systemd/system/tunneling.service`：
+
+```bash
+[Unit]
+Description=Tunneling Client Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/tunneling
+ExecStart=/opt/tunneling/Tunneling.Client
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=30
+KillMode=process
+SyslogIdentifier=Tunneling.Client
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable tunneling.service
+sudo systemctl start tunneling.service
+sudo systemctl status tunneling.service
+```
+
+#### 非 systemd 运行
+
+```bash
+nohup /opt/tunneling/Tunneling.Client > /var/log/tunneling.log 2>&1 &
+```
+
+> 根据实际部署路径调整 `WorkingDirectory` 和可执行文件位置。
+
+## 8. 使用方式
+
+外网访问时，直接使用服务端公网 IP + `PublicPort`，即可连接内网目标服务。
+
+## 9. 安全建议
+
+- 服务端账户 `UserName` / `Password` 请选择强密码。
+- `AccessToken` 请设置复杂字符串随机值，且每个 `MapGroups` 不同。
+- 确保服务端所在服务器安全可靠。
+- 只放行必要端口，避免无关端口暴露。
+
+## 10. 常见问题
+
+- 客户端无法连接：检查 `ServerAddress`、端口是否放通、`AccessToken` 是否一致。
+- 外网访问失败：确认服务端是否在线，客户端是否已连接，查看服务端日志。
+- Windows 服务异常：使用“事件查看器”排查服务启动失败原因。
 
 ---
 
-**版权所有 © 2024 量子隧道。保留所有权利。**
-
-**最后更新：2026年5月21日**
+如需进一步调整文档结构或补充说明，我可以继续帮你优化。
